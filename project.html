@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TSU Library System</title>
+  <style>
+    /* ===== GLOBAL STYLES ===== */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: #0b4aa2;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    header h1 { margin: 5px 0; }
+    header p { margin: 2px 0; font-size: 14px; }
+
+    nav {
+      background: #083b7a;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #083b7a;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    nav button:hover {
+      background: #dbe9ff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    h2 { color: #0b4aa2; }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button.action {
+      background: #0b4aa2;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button.action:hover { background: #083b7a; }
+
+    ul { list-style: none; padding: 0; }
+    li {
+      padding: 8px;
+      background: #f0f4ff;
+      margin: 5px 0;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #083b7a;
+      color: white;
+      font-size: 12px;
+      margin-top: 40px;
+    }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>TARABA STATE UNIVERSITY JALINGO</h1>
+  <h1>TSU LIBRARY SYSTEM</h1>
+  <p>Department of Computer Science | Course Code: CMP 399</p>
+  <p>Developed by: NATHANIEL JOSHUA</p>
+</header>
+
+<nav>
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('signup')">Sign Up</button>
+  <button onclick="showPage('login')">Login</button>
+  <button onclick="showPage('forgot')">Forgot Password</button>
+  <button onclick="showPage('search')">Search Books</button>
+  <button onclick="showPage('student')">Student Dashboard</button>
+  <button onclick="showPage('admin')">Admin Panel</button>
+</nav>
+
+<div class="container">
+
+  <!-- HOME PAGE -->
+  <div id="home" class="card">
+    <h2>Available Books by Department</h2>
+    <ul id="deptList"></ul>
+  </div>
+
+  <!-- SIGN UP PAGE -->
+  <div id="signup" class="card hidden">
+    <h2>Student Registration</h2>
+    <input type="text" placeholder="Full Name" />
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+    <input type="tel" placeholder="Phone Number" />
+    <label>Upload Student ID Card</label>
+    <input type="file" />
+    <button class="action">Register</button>
+  </div>
+
+  <!-- LOGIN PAGE -->
+  <div id="login" class="card hidden">
+    <h2>Student Login</h2>
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+    <button class="action" onclick="alert('Login Successful (Demo)')">Login</button>
+  </div>
+
+  <!-- FORGOT PASSWORD PAGE -->
+  <div id="forgot" class="card hidden">
+    <h2>Forgot Password</h2>
+    <input type="email" placeholder="Enter your Email" />
+    <button class="action">Reset Password</button>
+  </div>
+
+  <!-- SEARCH BOOKS PAGE -->
+  <div id="search" class="card hidden">
+    <h2>Search Library Books</h2>
+    <input type="text" id="searchInput" placeholder="Search books..." onkeyup="searchBooks()" />
+    <ul id="bookList"></ul>
+  </div>
+
+  <!-- STUDENT DASHBOARD -->
+  <div id="student" class="card hidden">
+    <h2>Student Dashboard</h2>
+    <p>Welcome, Student!</p>
+    <p>• View Borrowed Books</p>
+    <p>• Download E-books</p>
+    <p>• Update Profile</p>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="admin" class="card hidden">
+    <h2>Librarian Admin Panel</h2>
+    <p>• Add New Books</p>
+    <p>• Delete Books</p>
+    <p>• Update Department Statistics</p>
+    <p>• Manage Student Accounts</p>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 TARABA STATE UNIVERSITY JALINGO - TSU LIBRARY SYSTEM (CMP 399) | Developed by NATHANIEL JOSHUA
+</footer>
+
+<script>
+  // ===== DEPARTMENT DATA =====
+  const departments = [
+    { name: "Computer Science", books: 1200 },
+    { name: "Engineering", books: 950 },
+    { name: "Business Administration", books: 780 },
+    { name: "Mass Communication", books: 600 },
+    { name: "Science", books: 1100 },
+    { name: "Education", books: 720 },
+    { name: "Arts & Humanities", books: 500 }
+  ];
+
+  const books = [
+    "Introduction to Programming",
+    "Big Data Analytics",
+    "Database Systems",
+    "Artificial Intelligence Basics",
+    "Data Visualization with Python",
+    "Web Development Fundamentals",
+    "Operating Systems Concepts",
+    "Computer Networks"
+  ];
+
+  // Load Departments
+  const deptList = document.getElementById("deptList");
+  departments.forEach(d => {
+    const li = document.createElement("li");
+    li.innerHTML = `<span>${d.name}</span><strong>${d.books} Books</strong>`;
+    deptList.appendChild(li);
+  });
+
+  // Load Books
+  const bookList = document.getElementById("bookList");
+  function loadBooks(list) {
+    bookList.innerHTML = "";
+    list.forEach(b => {
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${b}</span><button onclick=\"alert('Downloading ${b} (Demo)')\">Download</button>`;
+      bookList.appendChild(li);
+    });
+  }
+  loadBooks(books);
+
+  // Search Books
+  function searchBooks() {
+    const value = document.getElementById("searchInput").value.toLowerCase();
+    const filtered = books.filter(b => b.toLowerCase().includes(value));
+    loadBooks(filtered);
+  }
+
+  // Navigation System
+  function showPage(page) {
+    const pages = ["home","signup","login","forgot","search","student","admin"];
+    pages.forEach(p => document.getElementById(p).classList.add("hidden"));
+    document.getElementById(page).classList.remove("hidden");
+  }
+</script>
+
+</body>
+</html>

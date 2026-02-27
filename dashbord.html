@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSU Library Dashboard</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+}
+
+/* Top Header */
+.header {
+  background: #0a4b8f;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Student Info Card */
+.profile-card {
+  background: white;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.profile-card h3 {
+  margin: 0;
+  color: #0a4b8f;
+}
+
+/* Dashboard Grid */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.card:hover {
+  background: #e6f0ff;
+}
+
+.card img {
+  width: 40px;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  margin: 0;
+  color: #333;
+}
+
+/* Bottom Navigation */
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+}
+
+.navbar div {
+  text-align: center;
+  font-size: 14px;
+  color: #0a4b8f;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">TSU Library Dashboard</div>
+
+<div class="profile-card">
+  <h3>Welcome, Nathaniel Joshua</h3>
+  <p>Matric No: TSU/CS/2023/001</p>
+  <p>Department: Computer Science</p>
+</div>
+
+<div class="dashboard">
+  <div class="card" onclick="alert('View Books')">
+    📚
+    <h4>Library Books</h4>
+  </div>
+
+  <div class="card" onclick="alert('Search Books')">
+    🔍
+    <h4>Search Book</h4>
+  </div>
+
+  <div class="card" onclick="alert('Borrowed Books')">
+    🧾
+    <h4>Borrowed Books</h4>
+  </div>
+
+  <div class="card" onclick="alert('E-Library')">
+    💻
+    <h4>E-Library</h4>
+  </div>
+
+  <div class="card" onclick="alert('Notifications')">
+    🔔
+    <h4>Notifications</h4>
+  </div>
+
+  <div class="card" onclick="logout()">
+    🚪
+    <h4>Logout</h4>
+  </div>
+</div>
+
+<div class="navbar">
+  <div onclick="alert('Home')">🏠 Home</div>
+  <div onclick="alert('Profile')">👤 Profile</div>
+  <div onclick="alert('Settings')">⚙️ Settings</div>
+</div>
+
+<script>
+function logout() {
+  alert("Logged out!");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
